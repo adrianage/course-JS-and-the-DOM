@@ -80,8 +80,8 @@ window.addEventListener("scroll", activeSection);
 
 // Scroll to anchor ID using scrollTO event
 // Scroll to section on link click
-const scroll = () => {
-  const hook = document.querySelectorAll(".navbar_menu a");
+function scroll() {
+  let hook = document.querySelectorAll(".navbar_menu a");
   hook.forEach((link) => {
     link.addEventListener("click", () => {
       for (i = 0; i < sections; i++) {
@@ -89,7 +89,7 @@ const scroll = () => {
       }
     });
   });
-};
+}
 
 scroll();
 
