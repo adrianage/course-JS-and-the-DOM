@@ -1,13 +1,11 @@
 # Landing Page Project
 
-## Table of Contents
+## Challenge of project
 
-* [Instructions](#instructions)
+* DOM Manipulation.
+* Creating HTML elements with JavaScript.
+* Make a static landing page dynamic links from the navigation that take you to specific sections.  
 
-## Instructions
+## View or Download project
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+The project can be cloned, downloaded or the code can be viewed through this repository. The project is public, the html and css were imported from Udacity's Landing Page Project lesson repository.   
