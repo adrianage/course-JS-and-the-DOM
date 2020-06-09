@@ -58,8 +58,7 @@ const sections = document.querySelectorAll("section");
 function makeNav() {
   let navItem = "";
   sections.forEach((section) => {
-    // const sectionID = section.id;
-
+    const sectionID = section.id;
     const sectionDataNav = section.dataset.nav;
     navItem += `<li><a class="menu__link" href="#">${sectionDataNav}</a></li>`;
   });
@@ -102,18 +101,27 @@ window.addEventListener("scroll", activeSection);
 // Scroll to anchor ID using scrollTO event
 // Scroll to section on link click
 
-const scroll = () => {
-  const hook = document.querySelectorAll(".navbar_menu a");
-  hook.forEach((link) => {
-    link.addEventListener("click", () => {
-      for (i = 0; i < sections; i++) {
-        sections[i].addEventListener("click", sectionScroll(link));
-      }
-    });
+function goToSection() {
+  window.addEventListener("click", function (event) {
+    const clicked = document.querySelector("#" + event.target.section.id);
+    clicked.scrollIntoView();
   });
-};
+}
 
-scroll();
+goToSection();
+
+// const scroll = () => {
+//   const hook = document.querySelectorAll(".navbar_menu a");
+//   hook.forEach((link) => {
+//     link.addEventListener("click", () => {
+//       for (i = 0; i < sections; i++) {
+//         sections[i].addEventListener("click", sectionScroll(link));
+//       }
+//     });
+//   });
+// };
+
+// scroll();
 
 /**
  * End Main Functions
