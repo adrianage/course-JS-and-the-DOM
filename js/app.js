@@ -17,13 +17,13 @@
  * Define Global Variables
  *
  */
-// Navigation element selection
-const nav = document.getElementById("navbar__list");
-// Selection of sections
+
+const nav = document.querySelector("#navbar__list");
+
 const sections = document.querySelectorAll("section");
 
 /**
- * End Glo bal Variables
+ * End Global Variables
  * Start Helper Functions
  *
  */
@@ -34,97 +34,76 @@ const sections = document.querySelectorAll("section");
  *
  */
 
-//  Attempted to add fourth section through inserting HTML but being able to highligh Section 4 and have it show up on the navigation was a very difficult task. The elements for this section now reside on the HTML file of the project:
+// build the nav
+const i = 0;
 
-// const addSection = document.querySelector("main");
-// const addElement = document.createElement("section");
+sections.forEach((section, i) => {
+  let listItem = document.createElement("li");
+  let link = document.createElement("a");
+  let identSection = section.id;
+  let dataNavAtt = section.dataset.nav;
 
-// addElement.id = "section4";
-// addElement.dataset.nav = "Section 4";
+  link.innerHTML += `${dataNavAtt}`;
+  link.setAttribute("href", identSection);
+  link.className += "menu__link";
 
-// addSection.insertAdjacentElement(
-//   "beforeend",
-//   addElement
-// ).innerHTML += `<div class="landing__container">
-// <h2>Section 4</h2>
-// <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum metus faucibus lectus pharetra dapibus. Suspendisse potenti. Aenean aliquam elementum mi, ac euismod augue. Donec eget lacinia ex. Phasellus imperdiet porta orci eget mollis. Sed convallis sollicitudin mauris ac tincidunt. Donec bibendum, nulla eget bibendum consectetur, sem nisi aliquam leo, ut pulvinar quam nunc eu augue. Pellentesque maximus imperdiet elit a pharetra. Duis lectus mi, aliquam in mi quis, aliquam porttitor lacus. Morbi a tincidunt felis. Sed leo nunc, pharetra et elementum non, faucibus vitae elit. Integer nec libero venenatis libero ultricies molestie semper in tellus. Sed congue et odio sed euismod.</p>
-// <p>Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam. Cras eu tincidunt arcu, vitae rhoncus purus. Vestibulum fermentum consectetur porttitor. Suspendisse imperdiet porttitor tortor, eget elementum tortor mollis non.</p>
-// </div>
-// </section>`;
+  listItem.appendChild(link);
 
-// Removed this piece of code from the <li> element ${sectionID}
+  nav.appendChild(listItem);
 
-// Making the navigation
-function makeNav() {
-  let navItem = "";
-  sections.forEach((section) => {
-    const sectionID = section.id;
-    const sectionDataNav = section.dataset.nav;
-    navItem += `<li><a class="menu__link" href="#">${sectionDataNav}</a></li>`;
+  listItem.addEventListener("click", (event) => {
+    event.preventDefault();
+    const sectionHook = event.target.getAttribute("a");
+
+    const targetSection = document.querySelectorAll(".menu__link");
+    for (let j = 0; j < targetSection.length; j++) {
+      targetSection[j].addEventListener("click", (event) => {
+        event.preventDefault();
+        let hookOfSection = document.querySelectorAll("section");
+        hookOfSection.document.getAttribute("id");
+        hookOfSection.scrollIntoView({ behavior: "smooth" });
+      });
+    }
   });
-  nav.innerHTML = navItem;
-}
-
-makeNav();
+});
 
 // Add class 'active' to section when near top of viewport
-let offset = (section) => {
-  return Math.floor(section.getBoundingClientRect().top);
-};
-// Remove class to non-active sections
-let removeClass = (section) => {
-  section.classList.remove("your-active-class");
-  section.style.cssText = "background-color: rgba(166, 42, 208, 0.1);";
-};
 
-// Add class to active sections
-
-let addClass = (conditional, section) => {
-  if (conditional) {
-    section.classList.add("your-active-class");
-    section.style.cssText = "background-color: rgba(166, 42, 208, 0.5);";
+function sectionView() {
+  for (let section of sections) {
+    const position = section.getBoundingClientRect();
+    if (position.top <= 150 && position.bottom >= 150) {
+      let id = section.getAttribute("id");
+      section.document
+        .querySelector(`.${id}`)
+        .classList.add("your-active-class");
+      section.classList.add("active");
+      section.style.cssText = "background-color: rgba(166, 42, 208, 0.1);";
+    } else {
+      let id = section.getAttribute("id");
+      section.document
+        .querySelector(`.${id}`)
+        .classList.remove("your-active-class");
+      section.classList.remove("active");
+      section.style.cssText = "background-color: rgba(166, 42, 208, 0.5);";
+    }
   }
-};
-// Set sections as active
-function activeSection() {
-  sections.forEach((section) => {
-    const elementOffset = offset(section);
-    inviewport = () => elementOffset < 150 && elementOffset >= -150;
-
-    removeClass(section);
-    addClass(inviewport(), section);
-  });
 }
 
-window.addEventListener("scroll", activeSection);
+window.document.addEventListener("scroll", function () {
+  sectionView();
+});
 
 // Scroll to anchor ID using scrollTO event
-// Scroll to section on link click
-
-function goToSection() {
-  window.addEventListener("click", function (event) {
-    const clicked = document.querySelector("#" + event.target.section.id);
-    clicked.scrollIntoView();
-  });
-}
-
-goToSection();
-
-// const scroll = () => {
-//   const hook = document.querySelectorAll(".navbar_menu a");
-//   hook.forEach((link) => {
-//     link.addEventListener("click", () => {
-//       for (i = 0; i < sections; i++) {
-//         sections[i].addEventListener("click", sectionScroll(link));
-//       }
-//     });
-//   });
-// };
-
-// scroll();
 
 /**
  * End Main Functions
  * Begin Events
  *
  */
+
+// Build menu
+
+// Scroll to section on link click
+
+// Set sections as active
