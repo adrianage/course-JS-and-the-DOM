@@ -98,14 +98,14 @@ sections.forEach((section, i) => {
 
 // Set sections as active
 
-const eagle = document.querySelector(".item");
-eagle.classList += " active";
+const navBarSelection = document.querySelector(".item");
+navBarSelection.classList += " active";
 
-let bear = document.querySelector("ul");
-let tiger = document.querySelectorAll("li");
-tiger.forEach((el) => {
+let listContainer = document.querySelector("ul");
+let containedItem = document.querySelectorAll("li");
+containedItem.forEach((el) => {
   el.addEventListener("click", function () {
-    bear.querySelector(".active").classList.remove("active");
+    listContainer.querySelector(".active").classList.remove("active");
 
     el.classList.add("active");
   });
